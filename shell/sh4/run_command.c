@@ -20,7 +20,9 @@
 void run_command(char **myArgv) {
   pid_t pid;
   int stat;
+  int run_background;
 
+  run_background = is_background(myArgv);
   switch(pid = fork()) {
 
     /* Error. */
@@ -30,15 +32,17 @@ void run_command(char **myArgv) {
 
     /* Parent. */
     default :
-      waitpid(pid,&stat,0);	/* Wait for child to terminate. */
+      if (!run_background){
+         waitpid(pid,&stat,0);	/* Wait for child to terminate. */
 
-      if (WIFEXITED(stat) && WEXITSTATUS(stat)) {
-        fprintf(stderr, "Child %d exited with error status %d: %s\n",
-	    pid, WEXITSTATUS(stat), strerror(WEXITSTATUS(stat)));
+         if (WIFEXITED(stat) && WEXITSTATUS(stat)) {
+           fprintf(stderr, "Child %d exited with error status %d: %s\n",
+	          pid, WEXITSTATUS(stat), strerror(WEXITSTATUS(stat)));
 
-      } else if (WIFSIGNALED(stat) && WTERMSIG(stat)) {
-	fprintf (stderr, "Child %d exited due to signal %d: %s\n",
-	    pid, WTERMSIG(stat), strsignal(WTERMSIG(stat)));
+         } else if (WIFSIGNALED(stat) && WTERMSIG(stat)) {
+	      fprintf (stderr, "Child %d exited due to signal %d: %s\n",
+	          pid, WTERMSIG(stat), strsignal(WTERMSIG(stat)));
+         }
       }
       return;
 

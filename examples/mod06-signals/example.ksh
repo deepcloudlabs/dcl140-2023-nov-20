@@ -1,7 +1,7 @@
 #!/bin/bash
-trap "exec xcalc" INT
-trap "exec xcalc" QUIT
-trap "exec xcalc" TSTP
+trap "echo hello mars" INT
+trap "echo hello sun" QUIT
+trap "echo hello moon" TSTP
 while (( 1 ))
 do
    echo -n "Input: "

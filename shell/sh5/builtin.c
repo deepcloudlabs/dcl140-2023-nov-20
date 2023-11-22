@@ -21,9 +21,7 @@
 /****************************************************************************/
 
 /* "builtin" command tells whether a command is builtin or not. */
-static void bi_builtin(char ** argv) {
-  /* Fill in code. */
-}
+static void bi_builtin(char ** argv) ;
 
 
 /* "cd" command.  Why does this have to be a shell builtin command? */
@@ -60,7 +58,9 @@ static void bi_hostname(char ** argv) {
 
 /* "id" command shows user and group of this process. */
 static void bi_id(char ** argv) {
-  /* Fill in code. */
+   int id = getuid();
+   struct passwd *pwd = getpwuid(id);
+   printf("userid=%d (%s)\n",id,pwd->pw_name);
 }
 
 
@@ -85,9 +85,7 @@ static struct cmd {
   void (* do_it)(char **);	/* ... this function is executed. */
 } inbuilts[] = {
   { "builtin", 	bi_builtin},	/* List of (argv[0], function) pairs. */
-
-  /* Fill in code. */
-
+  { "id", 	bi_id},
   { "echo", 	bi_echo},
   { "quit",	bi_quit},
   { "exit",	bi_quit},
@@ -119,4 +117,17 @@ int is_builtin(char *cmd) {
 /* Execute the function corresponding to the builtin cmd found by is_builtin. */
 int do_builtin(char **argv) {
   this->do_it(argv);
+}
+
+static void bi_builtin(char ** argv) {
+   if (argv[1]){
+       printf("%s is %s a built in feature\n",argv[1],is_builtin(argv[1])?"":"not");
+   } else {
+      struct cmd *p = inbuilts;
+      while(p != NULL){
+          if (p->keyword == NULL) break;
+          printf("%s\n",p->keyword);
+          p++;
+      }
+   }
 }

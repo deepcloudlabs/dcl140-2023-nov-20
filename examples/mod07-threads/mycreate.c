@@ -15,7 +15,7 @@ void thread_start() {
 
   /* Create and start threads. */
   for (i = 0; i < NUM_THREADS; i++) {
-    pthread_create(&tid[i], NULL, sleeping, (void *)(SLEEP_TIME+i));
+    pthread_create(&tid[i], NULL, sleeping, (void *)(SLEEP_TIME));
   }
 }
 
@@ -27,7 +27,7 @@ void thread_wait() {
   terminated if main completes first. */
   for (i = 0; i < NUM_THREADS; i++) {
     pthread_join(tid[i], (void **)&return_value);
-    printf ("Thread %d returns %li.\n",i, return_value);
+    printf ("Thread %lx returns %li.\n",tid[i], return_value);
   }
 }
 
@@ -35,7 +35,7 @@ void thread_wait() {
 void* sleeping(void * arg) {
   int sleep_time = (int)arg;
   printf("%d\n",sleep_time);
-  //sleep(sleep_time);
+  sleep(sleep_time);
   return ((void *)sleep_time);
 }
 

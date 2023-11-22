@@ -10,7 +10,7 @@
 static char beep =  '\007';
 
 void handler(int i) {
-  write (STDOUT_FILENO, &beep, sizeof(beep));
+  printf ("Alarm!\n");
 }
 
 int main(int argc, char *argv[]) {

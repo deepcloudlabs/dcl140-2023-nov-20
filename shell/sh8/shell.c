@@ -7,7 +7,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <signal.h>
+#include <unistd.h>
+#include <sys/types.h>
 #include "shell.h"
+
+void handler(int signal_no){
+  fputs("Do not send interrupt!\n",stdout);
+  fputs("myshell -> ",stdout);
+}
 
 int main() {
   char line[LONGLINE];
@@ -16,11 +23,24 @@ int main() {
   struct sigaction child_handling;
 
   /* Ignore ^C and ^\ in shell, so they are passed on to child processes. */
-  /* Fill in code. */
-
+  /*
+  struct sigaction act;
+  act.sa_handler = handler;
+  sigemptyset(&act.sa_mask);
+  sigaddset(&act.sa_mask, SIGINT);
+  sigaddset(&act.sa_mask, SIGQUIT);
+  act.sa_flags = SA_RESTART;
+  sigaction(SIGQUIT, &act,(struct sigaction *) NULL);
+  sigaction(SIGINT, &act,(struct sigaction *) NULL);
+  */
+  sigset(SIGINT, SIG_IGN);
+  sigset(SIGQUIT, SIG_IGN);
   /* Optional exercise: Set up to reap children run in the background. */
-  /* Fill in code. */
-
+  child_handling.sa_handler = child_handler;
+  child_handling.sa_flags = SA_RESTART;
+  sigfillset(&child_handling.sa_mask);
+  sigaction(SIGCHLD, &child_handling,(struct sigaction *) NULL);
+  
   fputs("myshell -> ",stdout);
   while (fgets(line,LONGLINE,stdin)) {
 

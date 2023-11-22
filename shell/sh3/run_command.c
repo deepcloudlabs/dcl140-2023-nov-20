@@ -15,7 +15,7 @@ void run_command(char **myArgv) {
   int stat;
 
   /* Create a new child process. */
-  pid = fork(); 
+  /* Fill in code. */
 
   switch (pid) {
 
@@ -27,19 +27,20 @@ void run_command(char **myArgv) {
     /* Parent. */
     default :
       /* Wait for child to terminate. */
-      waitpid(pid,&stat,0); 
+      /* Fill in code. */
 
       /* Optional: display exit status.  (See wstat(5).) */
-      
+      /* Fill in code. */
 
       return;
 
     /* Child. */
     case 0 :
       /* Run command in child process. */
-      execvp(myArgv[0],myArgv);
-      
-      perror(myArgv[0]); 
+      /* Fill in code. */
+
+      /* Handle error return from exec */
+      /* Fill in code. */
 
       exit(errno);
    }

@@ -7,7 +7,6 @@ all:	myctime \
 	mygettimeofday \
 	mygetuid \
 	mylocaltime \
-	mygmtime \
 	mymaniptime \
 	mypathconf \
 	myputenv \

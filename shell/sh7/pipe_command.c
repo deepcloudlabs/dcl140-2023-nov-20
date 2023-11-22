@@ -4,11 +4,12 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 #include <errno.h>
 
-#include "shell.h"
 #include "pipe_command.h"
+#include "shell.h"
 
 void pipe_and_exec(char **myArgv) {
   int pipe_argv_index = pipe_present(myArgv);
@@ -21,8 +22,8 @@ void pipe_and_exec(char **myArgv) {
       errno = EINVAL;	/* Note this is NOT shell exit. */
       break;
 
-    case 0:	/* No pipe found in argv array or at end of argv array.
-		See pipe_present().  Exec with whole given argv array. */
+    case 0:	/* No pipe found in argv array.  See pipe_present(). */
+      execvp(myArgv[0], myArgv);
       break;
 
     default:	/* Pipe in the middle of argv array.  See pipe_present(). */
@@ -31,14 +32,11 @@ void pipe_and_exec(char **myArgv) {
        * Split arg vector into two where the pipe symbol was found.
        * Terminate first half of vector.
        */
+      myArgv[pipe_argv_index] = NULL;
 
-      /* Create a pipe to bridge the left and right halves of the vector. */
+      pipe(pipefds);
 
-      /* Create a new process for the right side of the pipe.
-       * (The left side is the running "parent".)
-       */
-    
-      switch( fork() ) {
+      switch(fork()) {
 
         case -1 :
 	  break;
@@ -47,21 +45,26 @@ void pipe_and_exec(char **myArgv) {
         default :
   
 	  /* Redirect output of "parent" through the pipe. */
+          dup2(pipefds[1],STDOUT_FILENO);
 
 	  /* Don't need write side of pipe, and read side dup'ed to stdin. */
+          close(pipefds[1]);
+          close(pipefds[0]);
 
-	  /* Exec the left command. */
+	  execvp(myArgv[0],myArgv);
 	  break;
 
         /* Listening child. */
         case 0 :
 
 	  /* Redirect input of "child" through pipe. */
+          dup2(pipefds[0],STDIN_FILENO);
 
 	  /* Don't need read side of pipe open.  Write side dup'ed to stdout. */
+          close(pipefds[0]);
+          close(pipefds[1]);
 
-	  /* Exec command on right side of pipe and recursively deal with
-	  other pipes */
+	  /* Exec and recursively deal with other pipes */
           pipe_and_exec(&myArgv[pipe_argv_index+1]);
       }
   }

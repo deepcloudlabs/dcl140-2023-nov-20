@@ -25,27 +25,25 @@ char ** parse(char *line) {
    * Init strtok with commandline, then get first token.
    * Return NULL if no tokens in line.
    */
-  if ( (token = strtok(line,delim)) == NULL){
-     return NULL;
-  } 
+  /* Fill in code. */
+
   /* Create array with room for first token. */
-  newArgv = malloc (sizeof(char*)); 
+  /* Fill in code. */
 
   /* While there are more tokens... */
-  while (token != NULL){ 
+  /* Fill in code. */
 
     /* Give token its own memory, then install it. */
-    newArgv[count++]= strdup(token); 
+    /* Fill in code. */
 
     /* Get next token. */
-    token = strtok(NULL,delim); 
+    /* Fill in code. */
 
     /* Resize array. */
-    newArgv = (char **)realloc(newArgv,(count+1)*sizeof(char*)); 
-  }
+    /* Fill in code. */
 
   /* Null terminate the array and return it. */
-  newArgv[count] = NULL; 
+  /* Fill in code. */
 
   return newArgv;
 }
@@ -61,8 +59,5 @@ void free_argv(char **oldArgv) {
 
   /* Free each string hanging off the array. */
   /* Free the oldArgv array itself. */
-  for (i=0;oldArgv[i] != NULL;++i){
-      free(oldArgv[i]);
-  }
-  free(oldArgv);
+  /* Fill in code. */
 }

@@ -8,14 +8,17 @@
 int is_background(char ** myArgv) {
 
   if (*myArgv == NULL)
-    return 0;
+    return FALSE;
 
   /* Look for "&" in myArgv, and process it. */
-  /* Fill in code. */
+  while (*myArgv != NULL) myArgv++;  
 
   /* Return TRUE if found. */
-  /* Fill in code. */
-
-  /* Return FALSE if not found. */
+  --myArgv;
+  if(*myArgv[0] == '&'){
+      *myArgv = NULL;
+      return TRUE;
+  }
+  return FALSE; 
   /* Fill in code. */
 }

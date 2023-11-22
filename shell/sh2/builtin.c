@@ -18,22 +18,10 @@
 
 /* "echo" command.  Does not print final <CR> if "-n" encountered. */
 static void bi_echo(char **argv) {
-   int i;
-
-   for(i=1;argv[i] != NULL;++i){
-      if( (argv[i][0] == '"') && (argv[i][strlen(argv[i]-1)] == '"'))
-        fputs(strcpy(NULL,argv[i]+1,strlen(argv[i]-2)), stdout);
-      else
-         fputs(argv[i], stdout); 
-      fputs(" ",stdout);
-   }
-   fputs("\n",stdout);
+  /* Fill in code. */
 }
 
-
-static void bi_quit(char **argv) {
-  exit(0); 
-}
+/* Fill in code. */
 
 
 /****************************************************************************/
@@ -44,10 +32,9 @@ static struct cmd {
   char * keyword;		/* When this field is argv[0] ... */
   void (* do_it)(char **);	/* ... this function is executed. */
 } inbuilts[] = {
-  {"quit", bi_quit},
-  {"logout", bi_quit},
-  {"exit", bi_quit},
-  {"bye", bi_quit},
+
+  /* Fill in code. */
+
   {"echo", bi_echo},		/* When "echo" is typed, bi_echo() executes.  */
   {NULL, NULL}			/* NULL terminated. */
 };

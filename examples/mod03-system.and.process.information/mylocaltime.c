@@ -7,9 +7,8 @@ int main() {
   struct tm *tmptr;
 
   time(&t);
-  tmptr = gmtime(&t);
+  tmptr = localtime(&t);
 
-  printf("The year is %d\n", tmptr->tm_year);
+  printf("The year is %d\n", 1900 + tmptr->tm_year);
   printf("The day of the year is %d\n", tmptr->tm_yday);
-  printf("Hour %d\n", tmptr->tm_hour);
 }

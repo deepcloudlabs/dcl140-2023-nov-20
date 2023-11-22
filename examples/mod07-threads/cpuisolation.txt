@@ -1,0 +1,2 @@
+/etc/default/grub:
+ GRUB_CMDLINE_LINUX_DEFAULT="quiet splash isolcpus=3,9,15"

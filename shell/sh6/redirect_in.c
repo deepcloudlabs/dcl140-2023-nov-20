@@ -1,36 +1,45 @@
-/* 
- * redirect_in.c  :  check for <
- */
-
 #include <unistd.h>
 #include <fcntl.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 #include <errno.h>
 #include "shell.h"
 
 /*
- * Look for "<" in myArgv, then redirect input to the file.
+ * Look for ">" in myArgv, then redirect output to the file.
  * Returns 0 on success, sets errno and returns -1 on error.
  */
 int redirect_in(char ** myArgv) {
   int i;
   int fd;
 
-  /* search forward for < */
-  /* Fill in code. */
-
-  if (myArgv[i]) {	/* found "<" in vector. */
-
+  /* search forward for > */
+  for(i=0;myArgv[i] != NULL;i++){
+     if (!strcmp(myArgv[i],"<")){
+       break; 
+    }
+  }
+  if (myArgv[i]) {	/* found ">" in vector. */
     /* Open file. */
-    /* Fill in code. */
+    if (!myArgv[i+1]){
+       return -1;
+    }
 
-    /* Redirect stdin to use file for input. */
-    /* Fill in code. */
-
+    /* Redirect to use it for output. */
+    if ((fd = open(myArgv[i+1],O_RDONLY)) == -1){
+        perror("redirecting");
+        return -1;
+    }
+    dup2(fd,STDIN_FILENO);
     /* Cleanup / close unneeded file descriptors. */
-    /* Fill in code. */
+    close(fd);
 
-    /* Remove the < and the filename from myArgv. */
-    /* Fill in code. */
+    /* Remove the > and the filename from myArgv. */
+    for(i=i+2;myArgv[i] != NULL;i++){
+        myArgv[i-1] = myArgv[i];
+    }
+    myArgv[i-2] = NULL;
   }
   return 0;
 }
