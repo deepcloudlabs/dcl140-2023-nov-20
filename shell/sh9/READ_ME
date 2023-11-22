@@ -1,0 +1,12 @@
+Goal 		: Add  built in timer
+
+Given 		: Makefile, header file , test harness shell, parser,
+		  builtin, run_command is_background redirect_in
+		  redirect_out pipe_present pipe_command, child_handler,
+		  stub timer
+
+Required	: set timer before forking ; parent stops the timer after wait
+		  Fill in timer.c file.
+
+Course Ref	: times(2)
+

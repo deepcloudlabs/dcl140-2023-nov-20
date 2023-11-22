@@ -1,0 +1,9 @@
+Goal 		: Add  pipe handling
+
+Given 		: Makefile, header file , test harness shell, parser,
+		  builtin, run_command is_background redirect_in
+		  redirect_out
+
+Required	: add pipe_present, pipe_command; alter run_command
+
+Course Ref	: pipe(2), dup2(3C), exec(2), close(2)

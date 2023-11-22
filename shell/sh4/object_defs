@@ -1,0 +1,6 @@
+SHELLOBJ = \
+parse.o \
+builtin.o \
+run_command.o \
+is_background.o \
+shell.o

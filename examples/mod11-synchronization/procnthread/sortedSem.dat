@@ -1,0 +1,110 @@
+0475,640933 Client 0A got a teller.  Count is now 3
+0475,641021 Client 0A doing business
+0475,641144 Client 0B got a teller.  Count is now 2
+0475,641202 Client 0B doing business
+0475,942385 Client 1A is in a hurry and got a teller. Count is now 1
+0475,942416 Client 1A doing business
+0475,942451 Client 1B is in a hurry and got a teller. Count is now 0
+0475,942468 Client 1B doing business
+0476,252505 Client 2A is in a hurry and no tellers available.  Skipping.
+0476,252588 Client 2B is in a hurry and no tellers available.  Skipping.
+0476,872422 Client 4B is in a hurry and no tellers available.  Skipping.
+0476,872489 Client 4A is in a hurry and no tellers available.  Skipping.
+0476,992309 Client 3B got a teller.  Count is now 0
+0476,992353 Client 3B doing business
+0476,992380 Client 0A done doing business.  Available teller count: 1
+0477,002478 Client 3A got a teller.  Count is now 0
+0477,002502 Client 3A doing business
+0477,002549 Client 0B done doing business.  Available teller count: 1
+0477,112178 Client 3B done doing business.  Available teller count: 1
+0477,122200 Client 3A done doing business.  Available teller count: 2
+0477,182403 Client 5A is in a hurry and got a teller. Count is now 1
+0477,182429 Client 5A doing business
+0477,182464 Client 5B is in a hurry and got a teller. Count is now 0
+0477,182480 Client 5B doing business
+0477,492690 Client 6A is in a hurry and no tellers available.  Skipping.
+0477,492767 Client 6B is in a hurry and no tellers available.  Skipping.
+0478,112436 Client 8A is in a hurry and no tellers available.  Skipping.
+0478,112503 Client 8B is in a hurry and no tellers available.  Skipping.
+0478,382223 Client 5A done doing business.  Available teller count: 1
+0478,382325 Client 5B done doing business.  Available teller count: 2
+0478,382485 Client 7A got a teller.  Count is now 1
+0478,382503 Client 7A doing business
+0478,382540 Client 7B got a teller.  Count is now 0
+0478,382557 Client 7B doing business
+0478,462395 Client 9A got a teller.  Count is now 0
+0478,462427 Client 9A doing business
+0478,462448 Client 1A done doing business.  Available teller count: 1
+0478,462517 Client 9B got a teller.  Count is now 0
+0478,462536 Client 9B doing business
+0478,462556 Client 1B done doing business.  Available teller count: 1
+0479,042625 Client 11A is in a hurry and no tellers available.  Skipping.
+0479,042697 Client 11B is in a hurry and no tellers available.  Skipping.
+0479,482266 Client 7A done doing business.  Available teller count: 1
+0479,482356 Client 7B done doing business.  Available teller count: 2
+0479,482425 Client 10A got a teller.  Count is now 1
+0479,482442 Client 10A doing business
+0479,482478 Client 10B got a teller.  Count is now 0
+0479,482495 Client 10B doing business
+0479,662445 Client 13A is in a hurry and no tellers available.  Skipping.
+0479,662507 Client 13B is in a hurry and no tellers available.  Skipping.
+0479,972546 Client 14A is in a hurry and no tellers available.  Skipping.
+0479,972632 Client 14B is in a hurry and no tellers available.  Skipping.
+0480,602332 Client 10A done doing business.  Available teller count: 1
+0480,602399 Client 10B done doing business.  Available teller count: 2
+0480,602501 Client 12A got a teller.  Count is now 1
+0480,602520 Client 12A doing business
+0480,602555 Client 12B got a teller.  Count is now 0
+0480,602572 Client 12B doing business
+0480,802299 Client 12A done doing business.  Available teller count: 1
+0480,802395 Client 12B done doing business.  Available teller count: 2
+0480,802483 Client 15A got a teller.  Count is now 1
+0480,802500 Client 15A doing business
+0480,802538 Client 15B got a teller.  Count is now 0
+0480,802555 Client 15B doing business
+0481,392326 Client 9A done doing business.  Available teller count: 1
+0481,392417 Client 9B done doing business.  Available teller count: 2
+0481,392485 Client 16A got a teller.  Count is now 1
+0481,392503 Client 16A doing business
+0481,392546 Client 16B got a teller.  Count is now 0
+0481,392563 Client 16B doing business
+0481,832595 Client 20A is in a hurry and no tellers available.  Skipping.
+0481,832661 Client 20B is in a hurry and no tellers available.  Skipping.
+0481,872312 Client 16A done doing business.  Available teller count: 1
+0481,872374 Client 16B done doing business.  Available teller count: 2
+0481,872468 Client 17A got a teller.  Count is now 1
+0481,872492 Client 17A doing business
+0481,872527 Client 17B got a teller.  Count is now 0
+0481,872544 Client 17B doing business
+0482,142541 Client 21A is in a hurry and no tellers available.  Skipping.
+0482,142619 Client 21B is in a hurry and no tellers available.  Skipping.
+0482,452662 Client 22A is in a hurry and no tellers available.  Skipping.
+0482,452727 Client 22B is in a hurry and no tellers available.  Skipping.
+0483,382846 Client 15A done doing business.  Available teller count: 1
+0483,382917 Client 15B done doing business.  Available teller count: 2
+0483,383024 Client 18A got a teller.  Count is now 1
+0483,383041 Client 18A doing business
+0483,383121 Client 18B got a teller.  Count is now 0
+0483,383139 Client 18B doing business
+0485,272499 Client 19A got a teller.  Count is now 0
+0485,272543 Client 19A doing business
+0485,272575 Client 17A done doing business.  Available teller count: 1
+0485,272690 Client 19B got a teller.  Count is now 0
+0485,272711 Client 19B doing business
+0485,272731 Client 17B done doing business.  Available teller count: 1
+0487,182606 Client 23A got a teller.  Count is now 0
+0487,182645 Client 23A doing business
+0487,182667 Client 18A done doing business.  Available teller count: 1
+0487,182808 Client 23B got a teller.  Count is now 0
+0487,182828 Client 23B doing business
+0487,182849 Client 18B done doing business.  Available teller count: 1
+0487,962471 Client 23A done doing business.  Available teller count: 1
+0487,962550 Client 23B done doing business.  Available teller count: 2
+0487,962617 Client 24A got a teller.  Count is now 1
+0487,962643 Client 24A doing business
+0487,962677 Client 24B got a teller.  Count is now 0
+0487,962694 Client 24B doing business
+0488,012464 Client 19A done doing business.  Available teller count: 1
+0488,012543 Client 19B done doing business.  Available teller count: 2
+0488,722505 Client 24A done doing business.  Available teller count: 3
+0488,722617 Client 24B done doing business.  Available teller count: 4

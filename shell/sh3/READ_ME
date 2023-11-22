@@ -1,0 +1,8 @@
+Goal 		: Add ability to execute command lines
+
+Given 		: Makefile, header file , test harness shell, parser,
+		  builtin, stub run_command
+
+Required	: flesh out run_command to do fork, exec and wait
+
+Course Ref	: fork(2), exec(2), wait(2)

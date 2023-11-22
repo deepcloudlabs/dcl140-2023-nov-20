@@ -1,0 +1,126 @@
+0524,002677 Push sleeping...
+0524,671441 Push sleeping...
+0526,161526 Pop sleeping...
+0526,171512 Pop sleeping...
+0526,541723 Pop sleeping...
+0526,611470 Pop sleeping...
+0527,051713 Pop sleeping...
+0527,201499 Pop sleeping...
+0529,051581 Push sleeping...
+0529,251701 Push sleeping...
+0529,931613 Pop sleeping...
+0531,611622 Push sleeping...
+0531,741610 Push sleeping...
+0532,131618 Push sleeping...
+0532,261650 Push sleeping...
+0532,401829 Push sleeping...
+0532,971660 Push sleeping...
+0533,041702 Push sleeping...
+0533,291849 Push sleeping...
+0533,651685 Push sleeping...
+0533,801865 Push sleeping...
+0533,971718 Push sleeping...
+0535,571739 Pop sleeping...
+0535,721799 Pop sleeping...
+0536,181747 Pop sleeping...
+0536,241728 Pop sleeping...
+0522,738559 Pushed:	char U	index 0
+0522,738801 Pop:	char U	index 0
+0522,739715 Pushed:	char U	index 0
+0522,739812 Pop:	char U	index 0
+0523,202460 Pushed:	char N	index 0
+0523,202549 Pushed:	char N	index 1
+0523,671439 Pop:	char N	index 1
+0523,672585 Pop:	char N	index 0
+0523,732400 Pushed:	char H	index 0
+0523,742387 Pushed:	char H	index 1
+0523,982563 Pushed:	char K	index 2
+0524,172425 Pop:	char K	index 2
+0524,172546 Pushed:	char K	index 2
+0524,182414 Pop:	char K	index 2
+0524,482567 Pushed:	char G	index 2
+0524,941565 Pop:	char G	index 2
+0524,941677 Pushed:	char G	index 2
+0524,961414 Pop:	char G	index 2
+0525,001552 Pop:	char H	index 1
+0525,031476 Pop:	char H	index 0
+0525,391469 Pushed:	char L	index 0
+0525,861478 Pushed:	char L	index 1
+0525,961480 Pop:	char L	index 1
+0526,001457 Pop:	char L	index 0
+0526,061493 Pushed:	char V	index 0
+0526,111540 Pop:	char V	index 0
+0526,541485 Pushed:	char V	index 0
+0526,541656 Pop:	char V	index 0
+0527,051567 Pushed:	char Y	index 0
+0527,051653 Pop:	char Y	index 0
+0527,131513 Pushed:	char E	index 0
+0527,131577 Pop:	char E	index 0
+0527,541506 Pushed:	char B	index 0
+0527,541610 Pop:	char B	index 0
+0527,701543 Pushed:	char E	index 0
+0527,701601 Pushed:	char R	index 1
+0528,101831 Pop:	char R	index 1
+0528,281530 Pushed:	char R	index 1
+0528,331536 Pop:	char R	index 1
+0528,341521 Pushed:	char N	index 1
+0528,451673 Pushed:	char H	index 2
+0528,901598 Pop:	char H	index 2
+0528,931581 Pushed:	char N	index 2
+0529,131562 Pop:	char N	index 2
+0529,131670 Pushed:	char H	index 2
+0529,341570 Pop:	char H	index 2
+0529,341648 Pushed:	char B	index 2
+0529,581556 Pop:	char B	index 2
+0529,711555 Pop:	char N	index 1
+0529,771564 Pop:	char E	index 0
+0529,941625 Pushed:	char B	index 0
+0529,941728 Pop:	char B	index 0
+0530,081572 Pushed:	char O	index 0
+0530,091595 Pop:	char O	index 0
+0530,191773 Pushed:	char E	index 0
+0530,521649 Pushed:	char O	index 1
+0530,691634 Pop:	char O	index 1
+0530,901608 Pushed:	char Y	index 1
+0531,061596 Pop:	char Y	index 1
+0531,281789 Pushed:	char M	index 1
+0531,351599 Pushed:	char Y	index 2
+0531,661609 Pop:	char Y	index 2
+0531,661724 Pushed:	char A	index 2
+0531,791640 Pop:	char A	index 2
+0531,791747 Pushed:	char M	index 2
+0532,401666 Pop:	char M	index 2
+0532,401764 Pushed:	char A	index 2
+0532,421920 Pop:	char A	index 2
+0532,421979 Pushed:	char U	index 2
+0533,011701 Pop:	char U	index 2
+0533,011799 Pushed:	char T	index 2
+0533,101649 Pop:	char T	index 2
+0533,101733 Pushed:	char R	index 2
+0533,801675 Pop:	char R	index 2
+0533,801783 Pushed:	char I	index 2
+0533,851737 Pop:	char I	index 2
+0533,851821 Pushed:	char T	index 2
+0534,031764 Pop:	char T	index 2
+0534,031827 Pushed:	char J	index 2
+0534,091775 Pop:	char J	index 2
+0534,351696 Pop:	char M	index 1
+0534,411717 Pushed:	char T	index 1
+0534,431722 Pop:	char T	index 1
+0534,611698 Pop:	char E	index 0
+0534,611765 Pushed:	char J	index 0
+0534,741696 Pushed:	char Q	index 1
+0534,801704 Pop:	char Q	index 1
+0534,941706 Pushed:	char S	index 1
+0535,071917 Pop:	char S	index 1
+0535,181785 Pop:	char J	index 0
+0535,191765 Pushed:	char N	index 0
+0535,521719 Pop:	char N	index 0
+0535,701879 Pushed:	char L	index 0
+0535,702198 Pop:	char L	index 0
+0536,061771 Pushed:	char T	index 0
+0536,061852 Pop:	char T	index 0
+0536,211729 Pushed:	char N	index 0
+0536,211786 Pop:	char N	index 0
+0537,091809 Pushed:	char T	index 0
+0537,091872 Pop:	char T	index 0

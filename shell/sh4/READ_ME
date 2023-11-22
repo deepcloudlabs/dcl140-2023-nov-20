@@ -1,0 +1,8 @@
+Goal 		: Add ability to deal with background jobs
+
+Given 		: Makefile, header file , test harness shell, parser,
+		  builtin, run_command stub is_background
+
+Required	: flesh out is_background, alter run_command
+
+Course Ref	: N/A

@@ -1,0 +1,13 @@
+Goal 		: Add  signal handling
+
+Given 		: Makefile, header file , test harness shell, parser,
+		  builtin, run_command is_background redirect_in
+		  redirect_out pipe_present pipe_command
+
+Required	: parent ignores signals ; child reverts to default
+		  Modify shell.c and run_command.c
+
+Optional	: Add SIGCHLD signal handler to reap background processes
+		  (Start with the example in chapter 6 text.)
+
+Course Ref	: sigset(3C), sigaction(2), waitpid(2)

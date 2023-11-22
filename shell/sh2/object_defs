@@ -1,0 +1,1 @@
+SHELLOBJ = parse.o builtin.o shell.o

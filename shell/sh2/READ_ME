@@ -1,0 +1,9 @@
+Goal 		: Add ability to recognize built in commands
+
+Given 		: Makefile, header file , test harness shell, parser,
+		  stub builtin
+
+Required	: flesh out stub builtin to recognize
+			echo quit logout exit bye
+
+Course Ref	: N/A

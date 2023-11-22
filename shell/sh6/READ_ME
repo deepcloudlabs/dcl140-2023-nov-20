@@ -1,0 +1,9 @@
+Goal 		: Add  redirection handling
+
+Given 		: Makefile, header file , test harness shell, parser,
+		  builtin, run_command is_background
+
+Required	: flesh-out redirect_in and redirect_out sources, and
+		  add redirect_in and redirect_out to run_command
+
+Course Ref	: dup2(3C), open(2)

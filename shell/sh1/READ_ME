@@ -1,0 +1,8 @@
+Goal 		: write and test a shell parser and argv teardown function
+
+Given 		: Makefile, header file , test harness shell, stub parser
+
+Required	: flesh out stub parser
+
+Course Ref	: strtok(3C) and realloc(3C)
+

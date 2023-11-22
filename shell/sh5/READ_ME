@@ -1,0 +1,13 @@
+Goal 		: Add  builtin commands (details under Course Ref)
+
+Given 		: Makefile, header file , test harness shell, parser,
+		  builtin, run_command is_background
+
+Required	: add to builtin commands for cd, pwd, id, hostname, builtin
+		  The "builtin" command lists the builtin functions.
+
+Course Ref	: 
+			chdir(2)
+			getcwd(3C)
+			getpwuid(3C) and others
+			uname(2)
