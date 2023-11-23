@@ -1,4 +1,4 @@
 ./talker &
 ./talker &
-./listener &
+./talker &
 ./listener &

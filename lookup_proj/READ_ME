@@ -1,0 +1,71 @@
+This directory contains a number of programs, all of  which  work
+in  the  same  way  and solve the same problem : namely, the user
+types in a word and gets, in reply, a dictionary definition.  The
+purpose  of  the exercise is to examine file handling and various
+different IPC mechanisms.  To allow  you  to focus  on  what   is
+important,  the following structure has been supplied.
+
+File		Purpose
+
+READ_ME		Allow you to pace yourself through these exercises.
+		Although there are suggestions at the end of each chapter
+		about what would be suitable to tackle, there is no reason
+		why you should not work ahead.
+
+Makefile	If you don't know what a Makefile does, and you discover
+		nothing else in this course, your time will have been well
+		spent.
+
+main.c		The same main serves to test any variant of lookup.
+		You do not need to change main.c in any way.
+		Read the comments in main.c
+
+dict		A raw source of information for the dictionary. The definitions
+		are drawn from "A Cynic's Lexicon". If you add definitions
+		of your own, be careful to adhere to the same format. Also
+		you may need to ensure that your definitions are in proper
+		dictionary order. sorter  (qv) will help achieve this.
+
+dict.h		An include file containing all necessary constants and
+		data structures.
+
+sorter		A little awk script to sort your dictionary.
+
+*.c		Template files. The main merit in using these is that they
+		have the correct structure and the correct include files.
+		All of the skeleton files in the templates directory will compile.
+		When run, they will probably do very little.
+		It should be clear where code is needed, since
+		they are commented quite extensively.
+
+Here is a brief explanation of the work involved. The numbers in parenthesis
+indicate the chapter upon which the exercise depends.
+
+Program		File to Edit		Description
+
+(4)convert      convert.c	Convert an editable file into
+				fixed-length record format.
+(4)file_lookup  lookup1.c	Simple linear search through file of fixed
+				length records.
+(5)isam_lookup  lookup2.c	File lookup, but use an in-memory
+				index, with qsort & bsearch.
+(9)fifo_client  lookup3.c	Get answers from a server, using a FIFO. 
+				Client creates named pipe to receive reply.
+				Multiple clients are allowed.
+(9)fifo_server  fifo_server.c	Be prepared to talk to fifo_client.
+(9)msgq_client  lookup4.c	As above, but using Sys V message queues.
+(9)msgq_server	msgq_server.c	Be prepared to talk to msgq_client.
+(10)mmap_lookup lookup5.c	Memory-mapped file. Use bsearch. The file will 
+				consist of fixed-length records, in lexical order.
+(11)shm_client	lookup6.c	Communicate with server using shared memory
+				and semaphores
+(11)shm_server	shm_server.c	Respond to shm_client
+(12)usock_client lookup7.c	Get answer from a server, using TCP Unix sockets
+(12)usock_server usock_server.c	Serve any number of usock_client. Work concurrently.
+(12)isock_client lookup8.c	Get answer from a server, using TCP Inet sockets
+(12)isock_server isock_server.c	Serve any number of isock_client. Work concurrently.
+(12)udp_client	 lookup9.c	Get answer from a server, using UDP Inet sockets.
+(12)udp_server	 udp_server.c	Serve udp_clients. Work iteratively.
+
+Skeleton files are in place for all of the above.
+

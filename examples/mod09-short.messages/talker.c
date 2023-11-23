@@ -8,7 +8,7 @@
 
 int main() {
 
-  int pd, n;
+  int pd, n,i;
   char msg[] = "Hi, Folks!";
 
   printf("Talker's here.\n");
@@ -19,11 +19,12 @@ int main() {
     perror("open");
     exit(1);
   }
-
+  for (i=0;i<10;++i){
   n = write(pd, msg, strlen(msg) + 1 );
   if( n == -1) {
     perror("write");
     exit(1);
+  }
   }
 
   close(pd);

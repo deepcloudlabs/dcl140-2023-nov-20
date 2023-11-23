@@ -1,0 +1,15 @@
+#! /usr/bin/ksh
+
+old=${1:-dict}
+new=${2:-newdict}
+
+awk 'BEGIN { FS="\n" ; RS = "" }
+	{ for (i = 1 ; i < NF ; i++)
+		printf "%s:",$i
+	  printf "%s\n",$i
+	}' $old |\
+sort | awk -F: '{
+	for (i = 1 ; i <= NF ; i++)
+		printf "%s\n",$i
+	printf "\n"
+	}' > $new
