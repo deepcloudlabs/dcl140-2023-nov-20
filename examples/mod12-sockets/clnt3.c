@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include <memory.h>
 
-#define PORTNUM 5998
+#define PORTNUM 2023
 
 int main() {
 
@@ -43,7 +43,7 @@ int main() {
     exit (1);
   }
 
-  if ((host = gethostbyname(name.nodename)) == NULL) { 
+  if ((host = gethostbyname("127.0.0.1")) == NULL) { 
     perror("gethostbyname"); 
     exit(1); 
   }

@@ -3,7 +3,9 @@
  * 	         of fixed length records. The file name is passed
  *	         as resource.
  */
-
+#include <string.h> 
+#include <stdio.h> 
+#include <stdlib.h> 
 #include "dict.h"
 
 int lookup(Dictrec * sought, const char * resource) {

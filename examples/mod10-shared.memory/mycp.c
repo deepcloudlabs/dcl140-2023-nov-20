@@ -31,8 +31,7 @@ int main(int argc, char *argv[]) {
     exit(1); 
   }
 
-  addr_in = mmap((caddr_t)NULL, statbuf.st_size, 
-      PROT_READ, MAP_SHARED, fd_in, (off_t)0);
+  addr_in = mmap((caddr_t)NULL, statbuf.st_size, PROT_READ, MAP_SHARED, fd_in, (off_t)0);
   if (addr_in == MAP_FAILED) { 
     perror("mmap");
     exit(1); 
@@ -48,13 +47,13 @@ int main(int argc, char *argv[]) {
   }
   ftruncate(fd_out,statbuf.st_size);
 
-  addr_out = mmap((caddr_t)NULL, statbuf.st_size, 
-      PROT_WRITE, MAP_SHARED, fd_out, (off_t)0);
+  addr_out = mmap((caddr_t)NULL, statbuf.st_size, PROT_WRITE, MAP_SHARED, fd_out, (off_t)0);
   if (addr_out == MAP_FAILED) { 
     perror("mmap");
     exit(1); 
   }
   memcpy(addr_out , addr_in, statbuf.st_size);
-  //munmap(addr,statbuf.st_size);
+  munmap(addr_in,statbuf.st_size);
+  munmap(addr_out,statbuf.st_size);
   return(0);
 }

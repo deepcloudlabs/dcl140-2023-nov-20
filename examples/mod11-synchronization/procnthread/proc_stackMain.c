@@ -67,6 +67,11 @@ Producer thread main.
     oneChar = getRandomChar();	/* Get a random character. */
     push(oneChar);		/* Push it on the stack. */
     fractSleep(drand48());	/* Sleep between 0 and 1 sec. */
+    fractSleep(drand48());	/* Sleep between 0 and 1 sec. */
+    fractSleep(drand48());	/* Sleep between 0 and 1 sec. */
+    fractSleep(drand48());	/* Sleep between 0 and 1 sec. */
+    fractSleep(drand48());	/* Sleep between 0 and 1 sec. */
+    fractSleep(drand48());	/* Sleep between 0 and 1 sec. */
   }
 }
 

@@ -15,7 +15,7 @@
 #include "dict.h"
 #define BIGLINE 512
 
-main(int argc, char **argv) {
+int main(int argc, char **argv) {
   FILE *in = stdin, * out = stdout;        /* defaults */
   char line[BIGLINE];
   char * newlineChar;
@@ -36,8 +36,7 @@ main(int argc, char **argv) {
   }
     
   /* Main reading loop : read word first, then definition into dr */
-
-  /* Loop through the whole file. */
+/* Loop through the whole file. */
   while (!eof) {
     dr = blank;   /* copy blank record */
 
@@ -49,13 +48,13 @@ main(int argc, char **argv) {
     if (newlineChar) {
       *newlineChar = '\0';
     }
-
+    fprintf(stderr,"\"%s\"\n",dr.word);
     /* Read definition. !Append lines directly into dr until run out of space.*/
     newoff = off = 0;
     while ((sizeof(dr.text)-off) > 0) {
       eof = (fgets(dr.text + off,sizeof(dr.text)-off,in) == NULL);
       newoff = strlen(dr.text);
-      
+       
       /* Stop appendingif EOF, blank line, or last char is not \n (line was
       truncated as not enough room in dr.text field.) */
       if ( eof || ((newoff - off) < 2) || (dr.text[newoff-1] != '\n')) {
@@ -77,7 +76,8 @@ main(int argc, char **argv) {
     fwrite(&dr,sizeof(dr),1,out); /* write out complete record */
   }
 
-fclose(in);
-fclose(out);
-}
 
+  fclose(in);
+  fclose(out);
+  return 0;
+}

@@ -14,6 +14,8 @@
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #include <sys/sem.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 
@@ -33,28 +35,33 @@ int lookup(Dictrec * sought, const char * resource) {
     first_time = 0;
 
     /* Connect to shared memory. */
-    /* Fill in code. */
+    if ((shmid = shmget(key,sizeof(Dictrec),0)) == -1 ) {
+      return UNAVAIL;
+    }
 
     /* Get shared memory virtual address. */
-    /* Fill in code. */
+    if (( shm = (Dictrec *)shmat(shmid,NULL,0)) == NULL ) {
+      return UNAVAIL;
+    }
 
     /* Get semaphore. */
-    /* Fill in code. */
+    if ((semid = semget(key,2,0)) == -1 ) {
+      return UNAVAIL;
+    }
   }
 
-  /* Reserve semaphore 0 so other clients will wait. */
-  /* Fill in code. */
-
+  /* Exclude other clients; write word in shm */
+  semop(semid,&grab,1);
   strcpy(shm->word,sought->word);
 
-  /* Alert server.  Bump semaphore 1 up by 2. */
-  /* Fill in code. */
+  /* Alert server. */
+  semop(semid,&alert,1);
 
   /* Wait for server to finish.  Server will have set sem 1 to zero. */
-  /* Fill in code. */
+  semop(semid,&await,1);
 
   /* Done using the server.  Release to other clients. */
-  /* Fill in code. */
+  semop(semid,&release,1);
 
   if (strcmp(shm->text,"XXXX") != 0) {
     strcpy(sought->text,shm->text);
@@ -63,3 +70,4 @@ int lookup(Dictrec * sought, const char * resource) {
 
   return NOTFOUND;
 }
+

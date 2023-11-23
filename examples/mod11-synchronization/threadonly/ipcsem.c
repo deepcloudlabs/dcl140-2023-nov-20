@@ -123,11 +123,12 @@ Main function.  Allocate and initialize resources, then spawn threads.
   }
 
 cleanup:
-
-  /* Delete the semaphore.  This is not done automatically by the system. */
+   printf("Done.\n");
+  /* Delete the semaphore.  This is not done automatically by the system. 
   if (semctl(semid, 0, IPC_RMID, NULL)) {
     perror ("semctl IPC_RMID:");
   }
+    */
 }
 
 

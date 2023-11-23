@@ -11,13 +11,15 @@
 #include <sys/stat.h>
 #include <sys/errno.h>
 #include <sys/types.h>
-#include <inttypes.h>
 #include <fcntl.h>
-#include <string.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #include <sys/sem.h>
 #include <errno.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
 
 #include "dict.h"
 
@@ -54,26 +56,38 @@ int main(int argc, char **argv) {
 
   /* Map one record's worth of shared memory.  The word of the sent value will
   be the request, and the text of the result will be returned as the answer. */
-  /* Fill in code. */
+  if ((shmid = shmget(key,sizeof(Dictrec),IPC_CREAT | 0666)) == -1 &&
+      errno != EEXIST) {
+    fprintf(stderr,"%s is not a valid key\n",argv[2]);
+    exit(errno);
+  }
 
-  /* Allocate a group of two semaphores.  Use same key as for shmem. */
-  /* Fill in code. */
+  /* Allocate a group of two semaphores. */
+  if ((semid = semget(key,2,IPC_CREAT | 0666)) == -1 &&
+      errno != EEXIST) {
+    fprintf(stderr,"%s is not a valid key\n",argv[2]);
+    exit(errno);
+  }
 
   /* Get shared memory virtual address. */
-  /* Fill in code. */
+  if (( shm = (Dictrec *)shmat(shmid,NULL,0)) == NULL ) {
+    DIE("Shared Memory");
+  }
 
   /* Set up semaphore group. */
   setit.array = vals;
-  /* Fill in code. */
+  if (semctl(semid,0,SETALL,setit) == -1) {
+    DIE("Sem control");
+  }
 
   /* Main working loop */
   for (;;) {
 
     /* When we are first started, value is zero.  Client sets to two to wake us
-     * up.  Try to decrement sem 1.  Then we will wait here until the semaphore
-     * is non-zero
-     */
-    /* Fill in code. */
+    up.  We will wait here until the semaphore is non-zero. */
+    if (semop(semid,&wait,1) == -1) {
+      DIE("Semop failure");
+    }
 
     /* Do the lookup here.  Write result directly into shared memory. */
     switch(lookup(shm,argv[1]) ) {
@@ -87,9 +101,11 @@ int main(int argc, char **argv) {
     }
         
     /* Decrement again so that we will block at the top of the for loop again
-     * until a client wakes us up again.
-     */
-    /* Fill in code. */
-
+    until a client wakes us up again. */
+    if (semop(semid,&wait,1) == -1) {
+      DIE("Semop failure");
+    }
   } /* end for */
+  return 0;
 }
+

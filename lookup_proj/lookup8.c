@@ -7,8 +7,11 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netdb.h>
-#include <string.h>
 #include <netinet/in.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
 
 #include "dict.h"
 
@@ -23,17 +26,30 @@ int lookup(Dictrec * sought, const char * resource) {
 
     /* Set up destination address. */
     server.sin_family = AF_INET;
-    /* Fill in code. */
+    server.sin_port = PORT;
+    if ((host = gethostbyname(resource)) == NULL) {
+      return UNAVAIL;
+    }
+    memcpy(&server.sin_addr,host->h_addr,host->h_length);
 
     /* Allocate socket. */
-    /* Fill in code. */
+    if ((sockfd = socket(AF_INET,SOCK_STREAM,0)) == -1) {
+      return UNAVAIL;
+    }
 
     /* Connect to the server. */
-    /* Fill in code. */
+    if (connect(sockfd,(struct sockaddr *)&server,sizeof(server)) == -1)
+      return UNAVAIL;
   }
 
   /* write query on socket ; await reply */
-  /* Fill in code. */
+  if (write(sockfd,sought->word,strlen(sought->word) + 1) == -1) {
+    return UNAVAIL;
+  }
+
+  if (read(sockfd,sought->text,sizeof(sought->text)) == -1) {
+    return UNAVAIL;
+  }
 
   if (strcmp(sought->text,"XXXX") != 0) {
     return FOUND;
@@ -41,3 +57,4 @@ int lookup(Dictrec * sought, const char * resource) {
 
   return NOTFOUND;
 }
+

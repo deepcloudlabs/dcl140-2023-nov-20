@@ -8,9 +8,12 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netdb.h>
-#include <unistd.h>
 #include <netinet/in.h>
 #include <errno.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
 
 #include "dict.h"
 
@@ -24,20 +27,29 @@ int main(int argc, char **argv) {
     exit(1);
   }
 
-  /* Create the socket. */
-  /* Fill in code. */
+  /* setup the socket for listening */
+  if ((sd = socket(AF_INET,SOCK_STREAM,0)) == -1) {
+    DIE("Failed to create socket.");
+  }
 
   /* Initialize address. */
-  /* Fill in code. */
+  server.sin_family = AF_INET;
+  server.sin_port = PORT;
 
   /* Name and activate the socket. */
-  /* Fill in code. */
+  if (bind(sd,(struct sockaddr *)&server,sizeof(server)) == -1) {
+    DIE("failed to make sock");
+  }
+
+  if (listen(sd,128) == -1) {
+    DIE("Failed to listen on socket");
+  }
 
   /* main loop : accept connection; fork a child to have dialogue */
   for (;;) {
 
     /* Wait for a connection. */
-    /* Fill in code. */
+    cd = accept(sd,NULL,NULL);
 
     /* Handle new client in a subprocess. */
     switch (fork()) {
@@ -50,17 +62,21 @@ int main(int argc, char **argv) {
         close (sd);	/* Rendezvous socket is for parent only. */
 
 	/* Get next request. */
-        while( 1 /* Fill in code. */){
+        while (read(cd,tryit.word,WORD)) {
 
           /* Lookup the word , handling the different cases appropriately */
           switch(lookup(&tryit,argv[1]) ) {
 
 	    /* Write response back to the client. */
             case FOUND: 
-              /* Fill in code. */
+              if (write(cd,tryit.text,strlen(tryit.text) + 1) == -1) {
+		perror ("Socket write or response");
+	      }
               break;
             case NOTFOUND: 
-              /* Fill in code. */
+              if (write(cd,"XXXX",5) == -1) {
+		perror ("Socket write of response");
+	      }
               break;
             case UNAVAIL:
 	      DIE(argv[1]);
@@ -73,4 +89,6 @@ int main(int argc, char **argv) {
         break;
       } /* end fork switch */
     } /* end forever loop */
+    return 0; 
 } /* end main */
+

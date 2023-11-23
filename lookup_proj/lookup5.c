@@ -36,19 +36,21 @@ int lookup(Dictrec * sought, const char * resource) {
     first_time = 0;
 
     /* Open the dictionary. */
-    /* Fill in code. */
+    if ((fd = open(resource, O_RDONLY)) == -1){
+        return UNAVAIL;
+    }
 
     /* Get record count for building the tree. */
     filsiz = lseek(fd,0L,SEEK_END);
     numrec = filsiz / sizeof(Dictrec);
 
     /* mmap the data. */
-    /* Fill in code. */
+    table = mmap(NULL, filsiz,PROT_READ,MAP_SHARED,fd,0);
     close(fd);
   }
     
   /* search table using bsearch */
-  /* Fill in code. */
+  found = bsearch(sought->word,table,numrec,sizeof(Dictrec),dict_cmp);  
   if (found) {
     strcpy(sought->text,found->text);
     return FOUND;

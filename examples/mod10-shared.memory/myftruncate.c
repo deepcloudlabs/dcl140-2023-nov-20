@@ -28,8 +28,7 @@ int main() {
 
   system("ls -l mapfile");
 
-  addr = mmap((caddr_t)NULL, 6*pagesize, PROT_READ |
-      PROT_WRITE, MAP_SHARED, fd, (off_t)0);
+  addr = mmap((caddr_t)NULL, 6*pagesize, PROT_READ | PROT_WRITE, MAP_SHARED, fd, (off_t)0);
   if (addr == MAP_FAILED) {
     perror("mmap");
     exit(1);

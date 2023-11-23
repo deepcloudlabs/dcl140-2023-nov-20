@@ -48,9 +48,8 @@ int main(int argc, char **argv) {
         perror("Could not receive message");
         continue; 
     }
-
+  
     strcpy(tryit.word,rcv.content.word);/* Get the word to lookup. */
-    
     snd.type = atol(rcv.content.id);	/* Get sender to set msg type.*/
 
     switch(lookup(&tryit,argv[1])) {	/* Lookup word in db. */

@@ -13,6 +13,7 @@
  */
 
 #include <errno.h>
+#include <string.h>
 
 #include "dict.h"
 
@@ -27,12 +28,13 @@ int main(int argc, char **argv) {
   }
 
   while(fputs("What word do you want : ",stderr),fgets(tryit.word,WORD,stdin)) {
+      tryit.word[strlen(tryit.word)-1]  =0 ;
     switch(lookup(&tryit,argv[1]) ) {
       case FOUND:
 	printf("%s : %s",tryit.word,tryit.text);
 	break;
       case NOTFOUND:
-	printf("%s : Not Found!\n",tryit.word) ;
+	printf("==== %s === : Not Found!\n",tryit.word) ;
 	break;
       case UNAVAIL:
 	DIE(argv[1]);

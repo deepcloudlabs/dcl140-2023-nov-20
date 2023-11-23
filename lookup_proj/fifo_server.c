@@ -8,6 +8,10 @@
 
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <string.h>
 #include <errno.h>
 
 #include "dict.h"
@@ -19,8 +23,7 @@ int main(int argc, char **argv) {
   Dictrec tryit;
 
   if (argc != 3) {
-    fprintf(stderr,"Usage : %s <dictionary source> "
-        "<resource / FIFO>\n",argv[0]);
+    fprintf(stderr,"Usage : %s <dictionary source> <FIFO>\n",argv[0]);
     exit(errno);
   }
 
@@ -58,13 +61,12 @@ int main(int argc, char **argv) {
     /* Get name of reply fifo and attempt to open it. */
     write_fd = open(cli.id,O_WRONLY); 
     /* lookup the word , handling the different cases appropriately */
-    /* Fill in code. */
     switch(lookup(&tryit,argv[1]) ) {
       case FOUND: 
         write(write_fd,tryit.text,strlen(tryit.text)+1);
         break;
       case NOTFOUND: 
-        write(write_fd,"NOT FOUND",10);
+        write(write_fd,"XXXX",5);
         break;
       case UNAVAIL:
         exit(2); 

@@ -7,6 +7,10 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/un.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <unistd.h>
 
 #include "dict.h"
 
@@ -23,14 +27,23 @@ int lookup(Dictrec * sought, const char * resource) {
     strcpy(server.sun_path,resource);
 
     /* Allocate socket. */
-    /* Fill in code. */
+    if ((sockfd = socket(AF_UNIX,SOCK_STREAM,0)) < 0) {
+      return UNAVAIL;
+    }
 
     /* Connect to the server. */
-    /* Fill in code. */
+    if (connect(sockfd,(struct sockaddr *)&server,sizeof(server)) == -1)
+      return UNAVAIL;
   }
 
   /* write query on socket ; await reply */
-  /* Fill in code. */
+  if (write(sockfd,sought->word,strlen(sought->word) + 1) == -1) {
+    return UNAVAIL;
+  }
+
+  if (read(sockfd,sought->text,sizeof(sought->text)) == -1) {
+    return UNAVAIL;
+  }
 
   if (strcmp(sought->text,"XXXX") != 0) {
     return FOUND;
@@ -38,3 +51,4 @@ int lookup(Dictrec * sought, const char * resource) {
 
   return NOTFOUND;
 }
+

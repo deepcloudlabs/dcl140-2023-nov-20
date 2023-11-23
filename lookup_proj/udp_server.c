@@ -9,6 +9,7 @@
 #include <netdb.h>
 #include <netinet/in.h>
 #include <errno.h>
+#include <string.h>
 
 #include "dict.h"
 
@@ -22,34 +23,48 @@ int main(int argc, char **argv) {
     exit(errno);
   }
 
-  /* Create a UDP socket. */
-  /* Fill in code. */
+  /* Create a UDP socket & bind to well-known port */
+  if ((sockfd = socket(AF_INET,SOCK_DGRAM,0)) == -1) {
+    DIE("Failed to create socket");
+  }
 
   /* Initialize address. */
-  /* Fill in code. */
+  server.sin_family = AF_INET;
+  server.sin_port = PORT;
 
   /* Name and activate the socket. */
-  /* Fill in code. */
+  if (bind(sockfd,(struct sockaddr *)&server,sizeof(server)) == -1) {
+    DIE("failed to make sock");
+  }
 
   for (;;) { /* await client packet; respond immediately */
 
     siz = sizeof(client); /* siz must be non-zero */
 
     /* Wait for a request. */
-    /* Fill in code. */
+    if (recvfrom(sockfd, tryit->word,sizeof(tryit->word), 0,
+        (struct sockaddr *)&client,&siz) == -1) {
+      perror ("Error receiving request.");
+      continue;
+    }
 
     /* Lookup request and respond to user. */
     switch(lookup(tryit,argv[1]) ) {
       case FOUND: 
-	/* Send response. */
-        /* Fill in code. */
+        if (sendto(sockfd, tryit->text,strlen(tryit->text) + 1, 0,
+            (struct sockaddr *)&client,siz) == -1) {
+	  perror ("Error sending response");
+	}
         break;
       case NOTFOUND : 
-	/* Send response. */
-        /* Fill in code. */
+        if (sendto(sockfd, "XXXX",5, 0,(struct sockaddr *)&client,siz) == -1) {
+	  perror ("Error sending response");
+	}
         break;
       case UNAVAIL:
 	DIE(argv[1]);
     } /* end lookup switch */
   } /* end forever loop */
+  return 0;
 } /* end main */
+

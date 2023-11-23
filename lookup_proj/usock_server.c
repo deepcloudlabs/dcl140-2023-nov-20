@@ -8,8 +8,11 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/un.h>
-#include <unistd.h>
 #include <errno.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
 #include "dict.h"
 
 int main(int argc, char **argv) {
@@ -23,20 +26,30 @@ int main(int argc, char **argv) {
       exit(errno);
     }
 
-    /* Setup socket. */
-    /* Fill in code. */
+    /* Setup socket for listening */
+    if ((sd = socket(AF_UNIX,SOCK_STREAM,0)) == -1) {
+      DIE("Failed to create socket.");
+    }
     
     /* Initialize address. */
-    /* Fill in code. */
+    server.sun_family = AF_UNIX;
+    strcpy(server.sun_path,argv[2]);
 
     /* Name and activate the socket. */
-    /* Fill in code. */
+    unlink(server.sun_path);
+    if (bind(sd,(struct sockaddr *)&server,sizeof(server)) == -1) {
+      DIE("Failed to make socket");
+    }
+
+    if (listen(sd,128) == -1) {
+      DIE ("Failed to listen on socket");
+    }
 
     /* main loop : accept connection; fork a child to have dialogue */
     for (;;) {
 
       /* Wait for a connection. */
-      /* Fill in code. */
+      cd = accept(sd,NULL,NULL);
 
       /* Handle new client in a subprocess. */
       switch (fork()) {
@@ -49,18 +62,21 @@ int main(int argc, char **argv) {
           close (sd);	/* Rendezvous socket is for parent only. */
 
 	  /* Get next request. */
-          /* Fill in code. */
-          while ( 1 /* change this */) {
+          while (read(cd,tryit.word,WORD)) {
 
 	    /* Lookup request. */
             switch(lookup(&tryit,argv[1]) ) {
 
 	      /* Write response back to client. */
               case FOUND: 
-          	/* Fill in code. */
+                if (write(cd,tryit.text,strlen(tryit.text) + 1) == -1) {
+		  perror ("Socket write of response");
+		}
                 break;
               case NOTFOUND: 
-          	/* Fill in code. */
+                if (write(cd,"XXXX",5) == -1) {
+		  perror ("Socket write of response");
+		}
                 break;
               case UNAVAIL:
 	        DIE(argv[1]);
@@ -77,4 +93,6 @@ int main(int argc, char **argv) {
           break;
       } /* end fork switch */
     } /* end forever loop */
+    return 0;
 } /* end main */
+

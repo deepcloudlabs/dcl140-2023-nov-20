@@ -8,6 +8,10 @@
 
 #include <sys/ipc.h>
 #include <sys/msg.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <stdio.h>
 
 #include "dict.h"
 
