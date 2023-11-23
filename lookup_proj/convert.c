@@ -15,7 +15,7 @@
 #include "dict.h"
 #define BIGLINE 512
 
-int main(int argc, char **argv) {
+main(int argc, char **argv) {
   FILE *in = stdin, * out = stdout;        /* defaults */
   char line[BIGLINE];
   char * newlineChar;
@@ -39,23 +39,45 @@ int main(int argc, char **argv) {
 
   /* Loop through the whole file. */
   while (!eof) {
+    dr = blank;   /* copy blank record */
 
-    /* Create and fill in a new blank record.
-     * First get a word and put it in the word field, then get the definition
-     * and put it in the text field at the right offset.  Pad the unused chars
-     * in both fields with nulls.
-     */
+    /* Read word.  Truncate at the end of the "word" field. */
+    if (fgets(dr.word,BIGLINE,in) == NULL ) /* try to read word */
+      break;
+    dr.word[sizeof(dr.word) - 1] = '\0'; /* Null terminate the field. */
+    newlineChar = strchr(dr.word, '\n');/* Null terminate at \n. */
+    if (newlineChar) {
+      *newlineChar = '\0';
+    }
 
-    /* Read word and put in record.  Truncate at the end of the "word" field. */
-    /* Fill in code. */
+    /* Read definition. !Append lines directly into dr until run out of space.*/
+    newoff = off = 0;
+    while ((sizeof(dr.text)-off) > 0) {
+      eof = (fgets(dr.text + off,sizeof(dr.text)-off,in) == NULL);
+      newoff = strlen(dr.text);
+      
+      /* Stop appendingif EOF, blank line, or last char is not \n (line was
+      truncated as not enough room in dr.text field.) */
+      if ( eof || ((newoff - off) < 2) || (dr.text[newoff-1] != '\n')) {
+        break;
 
-    /* Read definition, line by line, and put in record. */
-    /* Fill in code. */
+      /* Keep appending, but start overwriting last char (assumed a \n). */
+      } else {
+        off = newoff-1;
+      }
+    }
 
-    /* Write record out to file. */
-    /* Fill in code. */
+    /* Not blank line nor EOF, so flush the rest of this definition. */
+    if (!( eof || ((newoff - off) < 2))) {
+      do {
+        eof = fgets(line,BIGLINE,in) == NULL;
+      } while (strlen(line) >= 2);
+    }
+
+    fwrite(&dr,sizeof(dr),1,out); /* write out complete record */
   }
 
 fclose(in);
 fclose(out);
 }
+

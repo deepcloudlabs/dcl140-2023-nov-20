@@ -5,7 +5,6 @@
  */
 
 #include <stdlib.h>
-#include <string.h>
 #include "dict.h"
 
 typedef struct {
@@ -34,20 +33,26 @@ int lookup(Dictrec * sought, const char * resource) {
   if (first_time) { /* set up index */
     first_time = 0;
 
-    /* Open file. */
-    /* Fill in code. */
+    if ((in = fopen(resource,"r")) == NULL)
+      return UNAVAIL;
 
     /* Get number records in file by dividing ending file offset by recsize. */
-    /* Fill in code. */
+    fseek(in,0L,SEEK_END);
+    numrec = ftell(in) / sizeof(dr);
 
     /* Go to the beginning of the file. */
-    /* Fill in code. */
+    fseek(in, 0L, SEEK_SET);
 
     /* Allocate zeroed-out memory: numrec elements of struct Index. */
     table = calloc(sizeof(Index),numrec);
 
     /* Read the file into the just-allocated array in memory. */
-    /* Fill in code. */
+    for (i = 0;
+	fread(&dr,sizeof(dr),1,in) == 1;/* Read another element to process. */
+	i++) {
+      strcpy(table[i].word,dr.word);	/* Place word into the array. */
+      table[i].off = i * sizeof(dr);	/* Note the file offset of the entry.*/
+    }
 
     /* Sort the table of entry/offset Index structures. */
     qsort(table,numrec,sizeof(Index),dict_cmp);
@@ -57,13 +62,11 @@ int lookup(Dictrec * sought, const char * resource) {
   /* use bsearch to find word in the table; seek & read from file if found. */
   strcpy(tmp.word,sought->word);
   found = bsearch(&tmp,table,numrec,sizeof(Index),dict_cmp);
-
-  /* If found, go to that place in the file, and read the record into the
-   * caller-supplied space.
-   */
   if (found) {
-    /* Fill in code. */
+    fseek(in,found->off,SEEK_SET);
+    fread(sought,sizeof(dr),1,in);
     return FOUND;
   }
   return NOTFOUND;
 }
+

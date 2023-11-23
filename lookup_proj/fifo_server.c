@@ -25,35 +25,52 @@ int main(int argc, char **argv) {
   }
 
   /* Check for existence of dictionary and FIFO (both must exist) */
-  /* Fill in code. */
+  if(stat(argv[1],&stbuff) == -1){
+      perror(argv[0]);
+      exit(errno);
+  }
 
   /* Open FIFO for reading (blocks until a client connects) */
-  /* Fill in code. */
-
+  if(stat(argv[2],&stbuff) == -1){
+      perror(argv[0]);
+      exit(errno);
+  }
+  if(!S_ISFIFO(stbuff.st_mode)){
+     fprintf(stderr,"%s is not a pipe.",argv[2]);
+     exit(1); 
+  }
+  if ((read_fd = open(argv[2],O_RDONLY)) == -1){
+      perror(argv[0]);
+      exit(errno);
+  }
   /* Sit in a loop. lookup word sent and send reply down the given FIFO */
   for (;;) {
 
     /* Read request. */
-    /* Fill in code. */
-
+    if(read(read_fd,&cli,sizeof(Client)) == 0) {
+        close(read_fd);
+        if ((read_fd = open(argv[2],O_RDONLY)) == -1){
+           perror(argv[0]);
+           exit(errno);
+        }
+        continue;
+    }      
     /* Get name of reply fifo and attempt to open it. */
-    /* Fill in code. */
-
+    write_fd = open(cli.id,O_WRONLY); 
     /* lookup the word , handling the different cases appropriately */
     /* Fill in code. */
     switch(lookup(&tryit,argv[1]) ) {
       case FOUND: 
-        /* Fill in code. */
+        write(write_fd,tryit.text,strlen(tryit.text)+1);
         break;
       case NOTFOUND: 
-        /* Fill in code. */
+        write(write_fd,"NOT FOUND",10);
         break;
       case UNAVAIL:
-        break;
-        /* Fill in code. */
+        exit(2); 
     }
 
     /* close connection to this client (server is stateless) */
-    /* Fill in code. */
+    close(write_fd);    
   }
 }

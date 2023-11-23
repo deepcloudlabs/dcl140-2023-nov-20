@@ -11,19 +11,20 @@ int lookup(Dictrec * sought, const char * resource) {
   static FILE * in;
   static int first_time = 1;
 
-  if (first_time) { 
+  if (first_time) { /* open up the file */
     first_time = 0;
-    /* open up the file */
-    /* Fill in code. */
+    if ((in = fopen(resource,"r")) == NULL)
+      return UNAVAIL;
   }
 
   /* read from top of file, looking for match */
-  /* Fill in code. */
   rewind(in);
-  while( 1 /* change this */ ) {
-    /* Fill in code. */
-    return FOUND;
+  while(fread(&dr,sizeof(dr),1,in) == 1)
+    if (strcmp(sought->word,dr.word) == 0) {
+      strcpy(sought->text,dr.text);
+      return FOUND;
     }
 
   return NOTFOUND;
 }
+

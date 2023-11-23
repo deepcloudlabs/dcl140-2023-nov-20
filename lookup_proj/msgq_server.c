@@ -36,12 +36,18 @@ int main(int argc, char **argv) {
   }
 
   /* Get the message queue, key is based on commandline second argument. */
-  /* Fill in code. */
+  if( (qid = msgget(strtol(argv[2],(char**)NULL,0),IPC_CREAT|0666)) == -1){
+    perror(argv[0]);
+    exit(errno);
+  }
 
   for (;;) { /* await client messages ; reply immediately */
 
     /* Wait for / receive a message. */
-    /* Fill in code. */
+    if (msgrcv(qid,(struct msgbuf*) &rcv,sizeof(Client),1,0) == -1){
+        perror("Could not receive message");
+        continue; 
+    }
 
     strcpy(tryit.word,rcv.content.word);/* Get the word to lookup. */
     
@@ -61,6 +67,8 @@ int main(int argc, char **argv) {
     }
 
     /* Send response. */
-    /* Fill in code. */
+   if(msgsnd(qid,(struct msgbuf *)&snd,strlen(snd.text)+1,0)){
+       perror("Could not send message to client");
+   }
   }
 }

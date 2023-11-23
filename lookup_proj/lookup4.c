@@ -8,10 +8,6 @@
 
 #include <sys/ipc.h>
 #include <sys/msg.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
 
 #include "dict.h"
 
@@ -31,11 +27,19 @@ int lookup(Dictrec * sought, const char * resource) {
     snd.type = 1L;
 
     /* Open the message queue.  Use resource pointer value as key. */
-    /* Fill in code. */
+    if ((qid = msgget(strtol(resource,(char **)NULL,0),0)) == -1)
+      return UNAVAIL;
   }
 
   /* Send server the word to be found ; await reply */
-  /* Fill in code. */
+  strcpy(snd.content.word,sought->word);
+  if (msgsnd(qid,(struct msgbuf *)&snd,sizeof(Client),0) == -1) {
+    return UNAVAIL;
+  }
+
+  if (msgrcv(qid,(struct msgbuf *)&rcv,TEXT,pid,0) == -1) {
+    return UNAVAIL;
+  }
 
   strcpy(sought->text,rcv.text);
 
@@ -45,3 +49,4 @@ int lookup(Dictrec * sought, const char * resource) {
 
   return NOTFOUND;
 }
+
